@@ -1,6 +1,9 @@
 package yjw.test.security.web;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +51,23 @@ public class HomeApiController {
         user.setPassword(encPassword);
         userRepository.save(user);
         return "redirect:/loginForm";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/info")
+    public String info(){
+        return "개인정보";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") //data 메서드가 실행되기 직전에 실행된다.
+    @GetMapping("/data")
+    public String data(){
+        return "데이터정보";
+    }
+
+    @PostAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") //data 메서드가 실행 후에 실행된다.
+    @GetMapping("/test")
+    public String test(){
+        return "데이터정보";
     }
 }

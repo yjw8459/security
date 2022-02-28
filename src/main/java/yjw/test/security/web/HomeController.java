@@ -20,4 +20,5 @@ public class HomeController {
     public String joinForm(){
         return "joinForm";
     }
+
 }

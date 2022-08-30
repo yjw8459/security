@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import yjw.test.security.repository.UserRepository;
-import yjw.test.security.vo.User;
+import yjw.test.security.vo.Users;
 
 /*
 시큐리티 설정에서 loginProcessingUrl("/login") 걸어놓으면
@@ -25,9 +25,9 @@ public class PrincipalDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userEntity = userRepository.findByUsername(username);
-        if ( userEntity != null ){
-            return new PrincipalDetails(userEntity);
+        Users usersEntity = userRepository.findByUsername(username);
+        if ( usersEntity != null ){
+            return new PrincipalDetails(usersEntity);
         }
         return null;
     }

@@ -2,7 +2,7 @@ package yjw.test.security.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import yjw.test.security.vo.User;
+import yjw.test.security.vo.Users;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,10 +21,10 @@ import java.util.Collection;
  */
 public class PrincipalDetails implements UserDetails { //UserDetails를 구현함으로써 Authentication 객체에 넣을 수 있음
 
-    private User user;
+    private Users users;
 
-    public PrincipalDetails(User user){
-        this.user = user;
+    public PrincipalDetails(Users users){
+        this.users = users;
     }
 
     //해당 User의 권한을 리턴하는 곳
@@ -35,7 +35,7 @@ public class PrincipalDetails implements UserDetails { //UserDetails를 구현�
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return user.getRole();
+                return users.getRole();
             }
         });
         return collect;
@@ -43,12 +43,12 @@ public class PrincipalDetails implements UserDetails { //UserDetails를 구현�
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return users.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return users.getUsername();
     }
 
     @Override

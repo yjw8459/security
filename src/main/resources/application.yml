@@ -9,14 +9,19 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yjw_db?serverTimezone=Asia/Seoul
-    username: yjw
-    password: 1234
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/yjw_db?serverTimezone=Asia/Seoul
+#    url: jdbc:h2:mem:test
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
     hibernate:
-      ddl-auto: create #create update none
+      ddl-auto: none #create update none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    defer-datasource-initialization: true

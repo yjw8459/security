@@ -18,7 +18,7 @@ spring:
     driver-class-name: org.h2.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL57Dialect
+    #database-platform: org.hibernate.dialect.MySQL57Dialect
     hibernate:
       ddl-auto: none #create update none
       naming:

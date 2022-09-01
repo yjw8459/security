@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import yjw.test.security.util.SecurityFaliureHandler;
+import yjw.test.security.util.SecuritySuccessHandler;
 
 @Configuration
 @EnableWebSecurity  //활성화 여부 스프링 시큐리티 필터가 스프링 필터체인에 등록된다.
@@ -33,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/loginForm")
                 .loginProcessingUrl("/login")//login 주소가 호출되면 시큐리티가 낚아채서 대신 로그인 처리
                 .defaultSuccessUrl("/success")
+                .successHandler(new SecuritySuccessHandler())
+                .failureHandler(new SecurityFaliureHandler())
                 ;
 
     }

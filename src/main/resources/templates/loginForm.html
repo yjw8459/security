@@ -13,10 +13,16 @@
     <button>로그인</button>
 </form>
 <a href="/joinForm">회원가입</a>
-<ul>
-    <li th:text="|session.getId = ${#session.getId()}|"></li>
-    <li th:text="|session.getAttributeNames = ${#session.getAttributeNames()}|"></li>
-    <li th:text="|session.getCreationTime = ${#session.getCreationTime()}|"></li>
-</ul>
+
+<div>
+    <h2 id="errorMsg" style="color: red;"></h2>
+</div>
+<script>
+    /*<![CDATA[*/
+    console.log('[[ ${session.greeting} ]]');
+    if ( '[[ ${session.greeting} ]]' === '' )
+        document.getElementById("errorMsg").innerText = '[[ ${session.errorMsg} ]]';
+    /*]]*/
+</script>
 </body>
 </html>

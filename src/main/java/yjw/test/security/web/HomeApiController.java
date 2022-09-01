@@ -34,11 +34,10 @@ public class HomeApiController {
      * SecurityConfig 생성 시 낚아채지 않음
      * @return
      */
-//    @GetMapping("/login")
-//    public String login(){
-//        return "login";
-//    }
-
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
     @GetMapping("/join")
     public String join(){
         return "join";

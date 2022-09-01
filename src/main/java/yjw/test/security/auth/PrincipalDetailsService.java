@@ -1,12 +1,18 @@
 package yjw.test.security.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import yjw.test.security.repository.UserRepository;
 import yjw.test.security.vo.Users;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 시큐리티 설정에서 loginProcessingUrl("/login") 걸어놓으면
@@ -27,7 +33,10 @@ public class PrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users usersEntity = userRepository.findByUsername(username);
         if ( usersEntity != null ){
-            return new PrincipalDetails(usersEntity);
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(usersEntity.getRole()));
+            //return new PrincipalDetails(usersEntity);
+            return new User(usersEntity.getUsername(), usersEntity.getPassword(),authorities);
         }
         return null;
     }
